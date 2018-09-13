@@ -1,0 +1,14 @@
+// Sprite
+.bg-icon(@i:transparent) {
+	background: url("../../images/sprite.svg?ver=@{version}") no-repeat (@i);
+}
+.icon(@w, @h, @x, @y) {
+	width: @w;
+	height: @h;
+	.bg-icon;
+	background-position: @x @y
+}
+
+.icon-down {
+	.icon(12px, 7px, -4px, -7px);
+}
