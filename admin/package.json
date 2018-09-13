@@ -10,6 +10,7 @@
     "build:sit": "cross-env NODE_ENV=production env_config=sit node build/build.js",
     "lint": "eslint --ext .js,.vue src",
     "test": "npm run lint",
+    "start": "npm run dev",
     "precommit": "lint-staged"
   },
   "lint-staged": {
