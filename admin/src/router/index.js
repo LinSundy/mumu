@@ -141,6 +141,33 @@ export const constantRouterMap = [
     ]
   },
 
+  {
+    path: '/menu',
+    component: Layout,
+    name: 'menu',
+    redirect: 'menu/index',
+    meta: {
+      title: '菜单管理',
+      icon: 'menu'
+    },
+    children: [
+      {
+        path: 'index',
+        meta: {
+          title: '左侧菜单'
+        },
+        component: () => import('@/views/menu/leftNav/leftNav.vue')
+      },
+      {
+        path: 'top',
+        meta: {
+          title: '顶部导航'
+        },
+        component: () => import('@/views/menu/topNav/topNav.vue')
+      }
+    ]
+  },
+
   { path: '*', redirect: '/404', hidden: true }
 ]
 
