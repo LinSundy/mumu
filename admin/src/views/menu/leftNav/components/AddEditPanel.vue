@@ -4,25 +4,30 @@
       <div class="panelBody">
         <el-form ref="form" :model="form" :rules="rules" label-width="80px">
           <el-form-item label="菜单名称" prop="name">
-            <el-input v-model.trim="form.name" auto-complete="off"/>
+            <el-input v-model.trim="form.name"/>
           </el-form-item>
           <el-form-item label="图标名称" prop="icon">
-            <el-input v-model.trim="form.icon" auto-complete="off"/>
+            <el-input v-model.trim="form.icon"/>
           </el-form-item>
           <el-form-item label="排序">
-            <el-input v-model.number="form.sort" auto-complete="off"/>
+            <el-row>
+              <el-col :span="10">
+                <el-input v-model.number="form.sort" type="number"/>
+              </el-col>
+            </el-row>
           </el-form-item>
         </el-form>
       </div>
       <div slot="footer" class="dialog-footer">
         <el-button @click="hideAddEidtPanel">取 消</el-button>
-        <el-button type="primary" @click="hideAddEidtPanel">确 定</el-button>
+        <el-button type="primary" @click="submitForm">确 定</el-button>
       </div>
     </el-dialog>
   </div>
 </template>
 
 <script>
+import * as api from '../api/index.js'
 export default {
   name: 'AddEditPanel',
   props: {
@@ -44,14 +49,6 @@ export default {
         cb()
       }
     }
-    const validatIcon = (rule, value, cb) => {
-      const reg = /^[a-zA-Z]+$/
-      if (!reg.test(value)) {
-        cb(new Error('class名需要以字母开头并且不能为纯数子'))
-      } else {
-        cb()
-      }
-    }
     return {
       rules: {
         name: [
@@ -66,12 +63,6 @@ export default {
             trigger: 'blur'
           }, {
             validator: validatName,
-            trigger: 'blur'
-          }
-        ],
-        icon: [
-          {
-            validator: validatIcon,
             trigger: 'blur'
           }
         ]
@@ -91,6 +82,16 @@ export default {
   methods: {
     hideAddEidtPanel() {
       this.$emit('update:visible', false)
+    },
+    submitForm() {
+      console.log(this.form, 'this.form')
+      api.add().then(res => {
+        console.log('请求成功')
+      }).catch(err => {
+        if (err) {
+          console.log('请求失败')
+        }
+      })
     }
   }
 }
