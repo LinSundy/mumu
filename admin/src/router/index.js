@@ -156,7 +156,7 @@ export const constantRouterMap = [
         meta: {
           title: '左侧菜单'
         },
-        component: () => import('@/views/menu/leftNav/leftNav.vue')
+        component: () => import('@/views/menu/leftNav/index.vue')
       },
       {
         path: 'top',
