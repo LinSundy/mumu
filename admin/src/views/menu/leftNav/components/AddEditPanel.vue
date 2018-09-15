@@ -84,8 +84,7 @@ export default {
       this.$emit('update:visible', false)
     },
     submitForm() {
-      console.log(this.form, 'this.form')
-      api.add().then(res => {
+      api.add({ ...this.form }).then(res => {
         console.log('请求成功')
       }).catch(err => {
         if (err) {

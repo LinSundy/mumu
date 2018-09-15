@@ -2,5 +2,6 @@ import Axios from 'axios'
 
 Axios.defaults.baseURL = 'http://localhost:3000'
 export function add(params) {
-  return Axios.post('/leftNav', params)
+  console.log(params, '111')
+  return Axios.post('/leftNavs', params)
 }

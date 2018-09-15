@@ -15,16 +15,17 @@ const LeftNavSchema = new Schema({
   path: String
 })
 
-let LeftNavs = db.model('leftNavs', LeftNavSchema, 'menu');
+let LeftNavs = db.model('leftNavs', LeftNavSchema);
 
 router.get('/leftNavs', async ctx => {
    let res = await LeftNavs.find({}, (err, res) => {
     return res
   })
-  ctx.header = {
-     'Access-Control-Allow-Origin': "*"
-  }
   ctx.body = res
+})
+
+router.post('/leftNavs', async ctx => {
+  console.log(ctx.request.body, 'ctx');
 })
 
 module.exports =  router

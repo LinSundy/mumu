@@ -6,6 +6,8 @@ const Koa = require('koa')
 const db = require('./router/config')
 const publicRouter = require('./router/public')
 const cors = require('koa2-cors')
+const logger = require('koa-logger')
+const body = require('koa-body')
 const app = new Koa
 const port = 3000
 
@@ -17,6 +19,8 @@ db.on('open', () => {
   console.log('数据库启动成功, 端口为', port)
 })
 
+app.use(logger())
+app.use(body())
 app.use(cors())
 app.use(publicRouter.routes()).use(publicRouter.allowedMethods())
 
