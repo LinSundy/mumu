@@ -12,7 +12,7 @@
           <el-form-item label="排序">
             <el-row>
               <el-col :span="10">
-                <el-input v-model.number="form.sort" type="number"/>
+                <el-input v-model.number="form.sort" placeholder="默认排序是 0"/>
               </el-col>
             </el-row>
           </el-form-item>
@@ -28,6 +28,7 @@
 
 <script>
 import * as api from '../api/index.js'
+
 export default {
   name: 'AddEditPanel',
   props: {
@@ -49,6 +50,14 @@ export default {
         cb()
       }
     }
+    const validatIcon = (rule, value, cb) => {
+      const reg = /^[0-9]/
+      if (reg.test(value)) {
+        cb(new Error('icon命名不能以数字开头'))
+      } else {
+        cb()
+      }
+    }
     return {
       rules: {
         name: [
@@ -63,6 +72,17 @@ export default {
             trigger: 'blur'
           }, {
             validator: validatName,
+            trigger: 'blur'
+          }
+        ],
+        icon: [
+          {
+            required: true,
+            message: '请输入icon的名称',
+            trigger: 'blur'
+          },
+          {
+            validator: validatIcon,
             trigger: 'blur'
           }
         ]
@@ -84,11 +104,18 @@ export default {
       this.$emit('update:visible', false)
     },
     submitForm() {
-      api.add({ ...this.form }).then(res => {
-        console.log('请求成功')
-      }).catch(err => {
-        if (err) {
-          console.log('请求失败')
+      this.$refs['form'].validate(vaild => {
+        if (this.form) {
+          this.form.sort = 0
+        }
+        if (vaild) {
+          api.add({ ...this.form }).then(res => {
+            console.log('请求成功')
+          }).catch(err => {
+            if (err) {
+              console.log('请求失败')
+            }
+          })
         }
       })
     }
