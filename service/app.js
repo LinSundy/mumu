@@ -4,7 +4,7 @@
 
 const Koa = require('koa')
 const db = require('./config')
-const router = require('./router/router')
+const leftNavs = require('./router/menu/leftNavs')
 const cors = require('koa2-cors')
 const logger = require('koa-logger')
 const body = require('koa-body')
@@ -22,7 +22,7 @@ db.on('open', () => {
 app.use(logger())
 app.use(body())
 app.use(cors())
-app.use(router.routes()).use(router.allowedMethods())
+app.use(leftNavs.routes()).use(leftNavs.allowedMethods())
 
 app.listen(port)
 

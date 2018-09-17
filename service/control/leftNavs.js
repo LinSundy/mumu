@@ -1,5 +1,5 @@
-const db = require('../config')
-const leftNavsSchema = require('../Schema/leftNavs')
+const db = require('../../config')
+const leftNavsSchema = require('../../Schema/menu/leftNavs')
 
 const LeftModel = db.model('leftNavs', leftNavsSchema)
 
