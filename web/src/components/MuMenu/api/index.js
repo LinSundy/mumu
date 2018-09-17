@@ -4,5 +4,5 @@
 import {GET} from '../../../utils/request'
 
 export function leftNavs() {
-  return GET('/leftNavs')
+  return GET('/api/leftNavs')
 }

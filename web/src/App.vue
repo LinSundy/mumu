@@ -7,10 +7,7 @@
 
 <script>
 export default {
-  name: 'App',
-  mounted() {
-    console.log('执行App')
-  }
+  name: 'App'
 }
 </script>
 <style lang="less">

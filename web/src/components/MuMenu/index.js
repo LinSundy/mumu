@@ -1,7 +1,7 @@
 /**
  * Created by chelin on 2018/9/12
  */
-import MuMenu from './src/index'
+import MuMenu from './src/index.vue'
 
 export default {
   install(Vue) {

@@ -1,13 +1,16 @@
 <template>
-    
+
 </template>
 
 <script>
     export default {
-        name: 'Home'
+        name: 'Home',
+        mounted () {
+            console.log(process, '111');
+        }
     }
 </script>
 
-<style scoped>
-
+<style scoped lang="less">
+    @import './index.less'
 </style>

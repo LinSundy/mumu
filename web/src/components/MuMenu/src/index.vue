@@ -11,7 +11,10 @@
 
 <script>
 import * as api from '../api/index'
-
+//  引入mock
+if (process.env.NODE_ENV === 'development') {
+  require('../mock')
+}
 export default {
   name: 'MuMenu',
   data() {
@@ -22,14 +25,12 @@ export default {
   methods: {
     getData() {
       api.leftNavs().then(res => {
-        this.lists = res
-        console.log(this)
+        this.lists = res.data
       })
     }
   },
   mounted() {
     this.getData()
-    console.log(this.lists, '11')
   }
 }
 </script>
