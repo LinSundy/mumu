@@ -1,5 +1,5 @@
 <template>
-  <ul class="nav">
+  <ul class="nav" :style="{height: ulHeight + 'px'}">
     <li v-for="(item, index) of lists" :key="index">
       <a :href="item.path">
         <i :class="`iconfont icon-${item.icon}`"></i>
@@ -27,6 +27,15 @@ export default {
       api.leftNavs().then(res => {
         this.lists = res.data
       })
+    }
+  },
+  updated() {
+    console.log(this.ulHeight)
+  },
+  computed: {
+    ulHeight() {
+      let height = window.innerHeight
+      return height
     }
   },
   mounted() {
