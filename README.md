@@ -1,9 +1,16 @@
 # mumu1
 用的是vue+mongo前后端分离，包括后台管理使用element-ui
- - 前端是基于webpack打包工具，vue-cli初始化的
-   前端写的是单页面
-   字体库用到的是iconfont
- - 后端用的主要框架是koa、koa-router
+ - 前端是基于
+    - webpack打包工具
+    - vue-cli初始化的
+    - 前端写的是单页面应用
+    - 字体库用到的是iconfont
+    - 前端用到的mockjs
+    - 异步用的是axios
+ - 后端用的主要框架是
+    - koa
+    - koa-router
+    - koa-body
 
  -----
  ### 书写过程中遇到的问题，仅供交流

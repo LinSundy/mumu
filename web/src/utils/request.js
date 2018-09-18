@@ -1,7 +1,13 @@
 import axios from 'axios'
 
+var baseURl = ''
+
+if (!process.env.NODE_ENV === 'development') {
+  baseURl = 'http://localhost:3000'
+}
+
 const service = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: baseURl,
   timeout: 5000
 })
 
