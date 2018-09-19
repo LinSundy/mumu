@@ -31,10 +31,10 @@ Mock.mock('/api/leftNavs', 'get', () => {
         name: '站长交流',
         icon: 'pen'
       },
-      {
-        name: '投稿中心',
-        icon: 'person'
-      }
+      // {
+      //   name: '投稿中心',
+      //   icon: 'person'
+      // }
     ]
   }
 })

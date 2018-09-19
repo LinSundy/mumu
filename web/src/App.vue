@@ -17,7 +17,7 @@ export default {
     background-color: #eeeeee;
   }
   #app {
-    width: 1260px;
+    width: 1080px;
     margin: 0 auto;
     padding-left: 180px;
   }
