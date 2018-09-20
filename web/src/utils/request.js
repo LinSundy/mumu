@@ -40,7 +40,7 @@ export const GET = (url, data, config) => {
   const CONF = {
     url,
     method: 'get',
-    params: data
+    params: data,
   }
   return request({...CONF, ...config})
 }
