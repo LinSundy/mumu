@@ -18,7 +18,7 @@ import * as api from '../api/index';
 import icons from '../components/icons';
 //  引入mock
 if (process.env.NODE_ENV === 'development') {
-    require('../mock');
+  require('../mock')
 }
 export default {
     name: 'MuMenu',

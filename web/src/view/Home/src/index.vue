@@ -7,7 +7,7 @@
         </a>
       </div>
       <HomeNews></HomeNews>
-      <Pagination class="pagination" background layout="prev, pager, next" :total="1000"></Pagination>
+      <Pagination class="pagination" background layout="prev, pager, next" :total="100"></Pagination>
     </div>
     <div class="rightColumn">
 

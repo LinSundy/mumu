@@ -32,7 +32,7 @@ Mock.mock('/api/leftNavs', 'get', () => {
                 icon: 'pen'
             },
             {
-                name: '投稿中心1',
+                name: '投稿中心',
                 icon: 'person'
             }
         ]
