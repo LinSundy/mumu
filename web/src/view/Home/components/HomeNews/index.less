@@ -1,0 +1,49 @@
+@import '../../../../assets/less/common.less';
+.homeNews {
+  & > li {
+    .p10;
+    cursor: pointer;
+    .title {
+      .fs22;
+      .fb;
+      .black;
+    }
+    .desc {
+      .ptb10;
+      .lh30;
+      .fs14;
+      color: darken(@color-sub-font, 20%);
+    }
+    border-bottom: 1px solid @color-border;
+    &:hover {
+      background-color: @color-border;
+    }
+  }
+  dl {
+    .clearfix;
+    dd {
+      position: relative;
+      .fl;
+      color: @color-sub-font;
+      .pr10;
+      .mr10;
+      &:before {
+        position: absolute;
+        content: '';
+        right: 0;
+        height: 10px;
+        top: 4px;
+        width: 1px;
+        background-color: darken(@color-border, 20%);
+      }
+      &:last-child {
+        margin-right: 0;
+        padding-right: 0;
+        &:before {
+          content: '';
+          .dn;
+        }
+      }
+    }
+  }
+}
