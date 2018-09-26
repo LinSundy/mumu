@@ -11,7 +11,7 @@ Mock.mock('/api/homeNews', 'get', () => {
   let data = Mock.mock({
     'data|10': [
       {
-        title: '@csentence',
+        title: '@ctitle(8, 14)',
         desc: '@cparagraph',
         date: '@date',
         author: '@cname',
