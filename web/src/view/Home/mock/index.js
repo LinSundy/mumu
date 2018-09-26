@@ -1,11 +1,11 @@
-import Mock from 'mockjs';
+import Mock from 'mockjs'
 
 Mock.mock('/api/newsMessage', 'get', () => {
   return {
     msg:
       '【搜狗推出内容平台“搜狗号”，附注册地址】强烈推荐大家先注册一个帐号，占一个坑，免得以后越来越难申请了。毕竟在2019年，搜狗号也要推出广告分成、流量分成。'
-  };
-});
+  }
+})
 
 Mock.mock('/api/homeNews', 'get', () => {
   let data = Mock.mock({
@@ -19,6 +19,30 @@ Mock.mock('/api/homeNews', 'get', () => {
         'comment|1-50': 1
       }
     ]
-  });
-  return data;
-});
+  })
+  return data
+})
+
+Mock.mock('/api/hot', 'get', () => {
+  return Mock.mock({
+    'data|7': [{
+      'title': '@csentence'
+    }]
+  })
+})
+
+Mock.mock('/api/hotComment', 'get', () => {
+  return Mock.mock({
+    'data|7': [{
+      'title': '@csentence'
+    }]
+  })
+})
+
+Mock.mock('/api/links', 'get', () => {
+  return Mock.mock({
+    'data|7': [{
+      'title': '@ctitle(3, 5)'
+    }]
+  })
+})
