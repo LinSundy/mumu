@@ -11,7 +11,7 @@ export class CatsController {
         return this.catsService.findAll();
     }
 
-    @Post('world')
+    @Post('addCreate')
     async create(@Body() CatsDto: CatsDto) {
         this.catsService.create(CatsDto);
     }
