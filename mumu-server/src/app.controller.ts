@@ -1,9 +1,16 @@
 import { Get, Controller } from '@nestjs/common';
 import { AppService } from './app.service';
+import {CatsService} from "./cats/cats.service";
+import {CatsDto} from "./cats/cats.dto";
 
-@Controller()
+@Controller('self')
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  private readonly appService: AppService;
+  private readonly catsService: CatsService;
+  constructor(appService: AppService, catsService: CatsService) {
+    this.appService = appService;
+    this.catsService = catsService;
+  }
 
   @Get('home')
   root(): string {
@@ -13,5 +20,10 @@ export class AppController {
   @Get('all')
   findAll(): string[] {
     return ['1']
+  }
+
+  @Get('cats')
+  findAllCats(): CatsDto[]{
+    return this.catsService.findAll()
   }
 }
