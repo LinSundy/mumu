@@ -1,10 +1,15 @@
-import {Post, Controller, Body, Get} from '@nestjs/common';
+import {Post, Controller, Body, Get, HttpCode} from '@nestjs/common';
 import {UserDto} from "./user.dto";
 import {UserService} from "./user.service";
 
 @Controller('user')
 export class UserController {
     constructor(private readonly userService: UserService){}
+
+    @Post('login')
+    login(@Body() data: UserDto): object {
+        return data
+    }
 
     @Get('test')
     test(): UserDto[] {

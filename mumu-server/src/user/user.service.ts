@@ -7,7 +7,7 @@ interface UserInfo {
 
 @Injectable()
 export class UserService {
-    validateUser(data: UserInfo): boolean {
-        return true
+    validateUser(data: UserInfo) {
+
     }
 }
