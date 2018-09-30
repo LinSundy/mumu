@@ -6,13 +6,9 @@ import {UserService} from "./user.service";
 export class UserController {
     constructor(private readonly userService: UserService){}
 
+    @HttpCode(200)
     @Post('login')
-    login(@Body() data: UserDto): object {
-        return data
-    }
-
-    @Get('test')
-    test(): UserDto[] {
-        return [{username: 'chelin', password: 'cl123456'}, {username: 'weidepan', password: 'wdp123456'}]
+    login(@Body() UserDto: UserDto) {
+        return this.userService.validateUser(UserDto)
     }
 }

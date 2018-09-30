@@ -14,5 +14,5 @@ export function GET(url) {
 }
 
 export function POST(url, data) {
-  service.post(url, data)
+  return service.post(url, data)
 }

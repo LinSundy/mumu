@@ -28,15 +28,17 @@ const user = {
     // 登录
     Login({commit}, userInfo) {
       const username = userInfo.username.trim()
-      return new Promise((resolve, reject) => {
-        login(username, userInfo.password).then(response => {
-          const data = response.data
-          setToken(data.token)
-          commit('SET_TOKEN', data.token)
-          resolve()
-        }).catch(error => {
-          reject(error)
-        })
+      login(username, userInfo.password).then(response => {
+        const data = response.data
+        setToken(data.token)
+        commit('SET_TOKEN', data.token)
+        if (data.flag) {
+          console.log('正确，该跳转到内页了')
+        } else {
+          console.log('错误, haha')
+        }
+      }).catch((err) => {
+        console.log(err.msg)
       })
     },
 
