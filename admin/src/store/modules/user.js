@@ -1,12 +1,13 @@
 import {login, logout, getInfo} from '@/api/login'
 import {getToken, setToken, removeToken} from '@/utils/auth'
+import {Message} from 'element-ui'
 
 const user = {
   state: {
     token: getToken(),
     name: '',
     avatar: '',
-    roles: []
+    roles: ''
   },
 
   mutations: {
@@ -28,17 +29,21 @@ const user = {
     // 登录
     Login({commit}, userInfo) {
       const username = userInfo.username.trim()
-      login(username, userInfo.password).then(response => {
-        const data = response.data
-        setToken(data.token)
-        commit('SET_TOKEN', data.token)
-        if (data.flag) {
-          console.log('正确，该跳转到内页了')
-        } else {
-          console.log('错误, haha')
-        }
-      }).catch((err) => {
-        console.log(err.msg)
+      return new Promise((resolve, reject) => {
+        login(username, userInfo.password).then(response => {
+          const data = response.data
+          if (data.flag) {
+            setToken(data.token)
+            commit('SET_TOKEN', data.token)
+            commit('SET_ROLES', data.username)
+          } else {
+            Message.error(data.msg)
+          }
+          resolve()
+        }).catch(error => {
+          console.log(error)
+          reject(error)
+        })
       })
     },
 
@@ -47,7 +52,7 @@ const user = {
       return new Promise((resolve, reject) => {
         getInfo(state.token).then(response => {
           const data = response.data
-          if (data.roles && data.roles.length > 0) { // 验证返回的roles是否是一个非空数组
+          if (data.roles) { // 验证返回的roles是否是一个非空数组
             commit('SET_ROLES', data.roles)
           } else {
             reject('getInfo: roles must be a non-null array !')
@@ -66,7 +71,7 @@ const user = {
       return new Promise((resolve, reject) => {
         logout(state.token).then(() => {
           commit('SET_TOKEN', '')
-          commit('SET_ROLES', [])
+          commit('SET_ROLES', '')
           removeToken()
           resolve()
         }).catch(error => {

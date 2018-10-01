@@ -2,14 +2,6 @@ import request from '@/utils/request'
 import {POST} from '@/utils/axios'
 
 export function login(username, password) {
-  // return request({
-  //   url: '/user/login',
-  //   method: 'post',
-  //   data: {
-  //     username,
-  //     password
-  //   }
-  // })
   return POST('/user/login', {username, password})
 }
 

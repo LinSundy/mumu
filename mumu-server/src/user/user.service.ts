@@ -11,26 +11,17 @@ export class UserService {
         this.userModel = users
     }
 
-    async validateUser(UserDto: UserDto): Promise<object> {
+    async validateUser(UserDto: UserDto): Promise<number> {
         let username = UserDto.username;
         let res = await this.userModel.find({username});
         if (res.length < 1) {
-            return {
-                flag: false,
-                msg: '用户名不存在'
-            }
+            return 0;
         }
         let tempPwd = res[0].password;
         if (tempPwd === UserDto.password) {
-            return {
-                flag: true,
-                msg: '用户名密码正确'
-            }
+            return 1;
         } else {
-            return {
-                flag: false,
-                msg: '用户名密码不正确'
-            }
+            return 2;
         }
     }
 }
