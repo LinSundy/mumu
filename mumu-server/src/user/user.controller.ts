@@ -1,4 +1,4 @@
-import {Post, Controller, Body, Get, HttpCode, Header, Req } from '@nestjs/common';
+import {Post, Controller, Body, Get, HttpCode, Header, Req, Response } from '@nestjs/common';
 import {UserDto} from "./user.dto";
 import {UserService} from "./user.service";
 import {uuid} from "../utils";
@@ -7,9 +7,15 @@ import {uuid} from "../utils";
 export class UserController {
     constructor(private readonly userService: UserService){}
 
+    @Get('/chelin')
+    hello(@Req() req): string {
+        console.log(req.session, '第二次访问');
+        return 'hello world'
+    }
+
     @HttpCode(200)
     @Post('login')
-    async login(@Body() UserDto: UserDto, @Req() req) {
+    async login(@Body() UserDto: UserDto, @Req() req, @Response() res) {
         let num = await this.userService.validateUser(UserDto);
         if(num === 0) {
             return {
@@ -18,7 +24,11 @@ export class UserController {
                 msg: '用户不存在'
             }
         } else if (num === 1) {
-            req.session.userinfo = UserDto.username;
+            req.session.userinfo = {
+                username: UserDto.username,
+                roles: ['大总管']
+            };
+            console.log(req, 'req的信息');
             return {
                 flag: true,
                 token: uuid(),

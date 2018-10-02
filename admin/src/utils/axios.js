@@ -15,6 +15,6 @@ export function GET(url) {
 
 export function POST(url, data) {
   console.log(url, data)
-  console.log(service.post(url, data))
+  console.log(service.post(url, data), '11111')
   return service.post(url, data)
 }

@@ -41,7 +41,7 @@ const user = {
           }
           resolve()
         }).catch(error => {
-          console.log(error)
+          console.log(error, '错误')
           reject(error)
         })
       })
