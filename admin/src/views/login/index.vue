@@ -69,8 +69,8 @@ export default {
     }
     return {
       loginForm: {
-        username: '',
-        password: ''
+        username: 'chelin',
+        password: '123456'
       },
       // 校验规则
       loginRules: {
