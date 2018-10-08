@@ -1,16 +1,12 @@
 import request from '@/utils/request'
-import {POST} from '@/utils/axios'
+import {GET, POST} from '@/utils/axios'
 
 export function login(username, password) {
   return POST('/user/login', {username, password})
 }
 
-export function getInfo(token) {
-  return request({
-    url: '/user/info',
-    method: 'get',
-    params: { token }
-  })
+export function getInfo(username) {
+  return GET(`/user/info/${username}`)
 }
 
 export function logout() {

@@ -1,46 +1,26 @@
-import {Post, Controller, Body, Get, HttpCode, Header, Req, Response} from '@nestjs/common';
+import {Post, Controller, Body, Get, HttpCode, Header, Req, Param, Res} from '@nestjs/common';
 import {UserDto} from "./user.dto";
 import {UserService} from "./user.service";
-import {uuid} from "../utils";
 
 @Controller('user')
 export class UserController {
     constructor(private readonly userService: UserService) {
     }
 
-    @Get('/chelin')
-    hello(@Req() req): any {
-        console.log(req.session.userinfo, '第二次访问');
-        return "hello"
-    }
-
     @HttpCode(200)
     @Post('login')
-    async login(@Body() UserDto: UserDto, @Req() req, @Response() res) {
-        let num = await this.userService.validateUser(UserDto);
-        if (num === 0) {
-            res.send({
-                token: uuid(),
-                flag: false,
-                msg: '用户不存在'
-            });
-        } else if (num === 1) {
-            req.session.userinfo = {
-                username: UserDto.username,
-                roles: ['大总管']
-            };
-            // console.log(req, 'req的信息');
-            res.send({
-                flag: true,
-                token: uuid(),
-                msg: '用户名密码正确'
-            })
-        } else {
-            res.send({
-                token: uuid(),
-                flag: false,
-                msg: '用户名密码错误'
-            });
+    async login(@Body() UserDto: UserDto, @Req() req, @Res() res) {
+        let data = await this.userService.validateUser(UserDto);
+        if(data.status === 1) {
+            res.cookie('username', data.username);
+            res.cookie('roles', data.roles);
         }
+        res.send(data);
+    }
+
+    @Get('info/:username')
+    async userinfo(@Param() param) {
+        let data = await this.userService.userinfo(param);
+        return data[0]
     }
 }

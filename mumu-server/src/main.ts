@@ -1,6 +1,7 @@
 import {NestFactory} from '@nestjs/core';
 import {AppModule} from './app.module';
 import {uuid} from "./utils";
+import {login} from "./login.middleware";
 
 const cors = require('cors');
 const session = require('express-session');
@@ -12,14 +13,12 @@ async function bootstrap() {
         credentials: true
     }));
     app.use(session({
-        genid: function (req) {
-            return uuid() // use UUIDs for session Ids
-        },
         secret: uuid(),
         resave: true,
-        saveUninitialized: false,
+        saveUninitialized: true,
         cookie: {maxAge: 60 * 1000 * 60, httpOnly: true}
     }));
+    app.use(login);
     await app.listen(3000);
 }
 

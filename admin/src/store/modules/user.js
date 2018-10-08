@@ -1,5 +1,5 @@
 import {login, logout, getInfo} from '@/api/login'
-import {getToken, setToken, removeToken} from '@/utils/auth'
+import {getToken, removeToken} from '@/utils/auth'
 import {Message} from 'element-ui'
 
 const user = {
@@ -7,7 +7,8 @@ const user = {
     token: getToken(),
     name: '',
     avatar: '',
-    roles: ''
+    roles: [],
+    username: ''
   },
 
   mutations: {
@@ -22,26 +23,31 @@ const user = {
     },
     SET_ROLES: (state, roles) => {
       state.roles = roles
+    },
+    SET_USERNAME: (state, username) => {
+      state.username = username
     }
   },
 
   actions: {
     // 登录
-    Login({commit}, userInfo) {
+    Login({commit, dispatch}, userInfo) {
       const username = userInfo.username.trim()
       return new Promise((resolve, reject) => {
         login(username, userInfo.password).then(response => {
           const data = response.data
-          if (data.flag) {
-            setToken(data.token)
+          if (data.status === 1) {
+            // setToken(data.token)
+            commit('SET_USERNAME', data.username)
+            commit('SET_ROLES', data.roles)
             commit('SET_TOKEN', data.token)
-            commit('SET_ROLES', data.username)
+          } else if (data.status === 0) {
+            Message.error('用户名未找到')
           } else {
-            Message.error(data.msg)
+            Message.error('用户名密码错误')
           }
           resolve()
         }).catch(error => {
-          console.log(error, '错误')
           reject(error)
         })
       })
@@ -50,7 +56,7 @@ const user = {
     // 获取用户信息
     GetInfo({commit, state}) {
       return new Promise((resolve, reject) => {
-        getInfo(state.token).then(response => {
+        getInfo(state.username).then(response => {
           const data = response.data
           if (data.roles) { // 验证返回的roles是否是一个非空数组
             commit('SET_ROLES', data.roles)
@@ -82,6 +88,7 @@ const user = {
 
     // 前端 登出
     FedLogOut({commit}) {
+      console.log('执行前端登出')
       return new Promise(resolve => {
         commit('SET_TOKEN', '')
         removeToken()

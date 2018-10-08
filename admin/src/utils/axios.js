@@ -10,12 +10,10 @@ const service = axios.create({
   withCredentials: true
 })
 
-export function GET(url) {
-  service.get(url)
+export function POST(url, data) {
+  return service.post(url, data)
 }
 
-export function POST(url, data) {
-  console.log(url, data)
-  console.log(service.post(url, data), '11111')
-  return service.post(url, data)
+export function GET(url, data) {
+  return service.get(url, {params: data})
 }

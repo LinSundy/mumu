@@ -70,7 +70,7 @@ export default {
     return {
       loginForm: {
         username: 'chelin',
-        password: '123456'
+        password: 'cl123456'
       },
       // 校验规则
       loginRules: {
@@ -92,7 +92,6 @@ export default {
   watch: {
     $route: {
       handler: function (route) {
-        console.log('第一步监听route', route)
         this.redirect = route.query && route.query.redirect
       },
       immediate: true
