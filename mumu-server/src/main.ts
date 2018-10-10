@@ -13,6 +13,7 @@ async function bootstrap() {
         credentials: true
     }));
     app.use(session({
+        name: 'Admin-Token',
         secret: uuid(),
         resave: true,
         saveUninitialized: true,

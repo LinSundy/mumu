@@ -13,7 +13,7 @@ export class UserController {
         let data = await this.userService.validateUser(UserDto);
         if(data.status === 1) {
             res.cookie('username', data.username);
-            res.cookie('roles', data.roles);
+            req.session.username = data.username;
         }
         res.send(data);
     }

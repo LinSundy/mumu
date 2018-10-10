@@ -15,5 +15,7 @@ export function POST(url, data) {
 }
 
 export function GET(url, data) {
+  console.log(service.get(url, {params: data}), '1')
+  console.log(url, data, 'axios --axios.js')
   return service.get(url, {params: data})
 }

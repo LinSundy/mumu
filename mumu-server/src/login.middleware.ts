@@ -1,17 +1,15 @@
+const whiteList = ['/user/login'];
+
 export function login(req, res, next) {
-    if(req.sessionId) {
+    const username = req.session.username;
+    if (username) {
         next();
     } else {
-        if (req.path === '/login') {
+        if (whiteList.indexOf(req.path) >= 0) {
             next()
         } else {
-            res.location('http://localhost:9528/#/login');
+            res.location('/login');
             next()
         }
-
-
-
-        // 跳转到登录页面 或者 跳转到当前登录页
-        // req.setAttribute('url','http://localhost:9528/#/login')
     }
 };
