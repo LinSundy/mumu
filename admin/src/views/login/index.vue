@@ -93,6 +93,7 @@ export default {
     $route: {
       handler: function (route) {
         this.redirect = route.query && route.query.redirect
+        console.log(this.redirect, '需要赋值')
       },
       immediate: true
     }
@@ -110,6 +111,7 @@ export default {
         if (valid) {
           this.loading = true
           this.$store.dispatch('Login', this.loginForm).then(() => {
+            console.log('登录成功，需要跳转')
             this.loading = false
             this.$router.push({path: this.redirect || '/'})
           }).catch(() => {

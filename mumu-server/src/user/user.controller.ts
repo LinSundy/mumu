@@ -12,15 +12,15 @@ export class UserController {
     async login(@Body() UserDto: UserDto, @Req() req, @Res() res) {
         let data = await this.userService.validateUser(UserDto);
         if(data.status === 1) {
-            res.cookie('username', data.username);
             req.session.username = data.username;
         }
         res.send(data);
     }
 
-    @Get('info/:username')
-    async userinfo(@Param() param) {
-        let data = await this.userService.userinfo(param);
+    @Get('info')
+    async userinfo(@Req() req) {
+        const username = req.session.username;
+        let data = await this.userService.userinfo({username});
         return data[0]
     }
 }

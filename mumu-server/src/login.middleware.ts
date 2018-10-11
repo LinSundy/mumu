@@ -1,15 +1,14 @@
 const whiteList = ['/user/login'];
 
 export function login(req, res, next) {
-    const username = req.session.username;
-    if (username) {
+    const sessionUsername = !!req.session.username;
+    if (sessionUsername) {
         next();
     } else {
         if (whiteList.indexOf(req.path) >= 0) {
             next()
         } else {
-            res.location('/login');
-            next()
+            res.send({status: 10000, statusText: '用户未登录'});
         }
     }
 };

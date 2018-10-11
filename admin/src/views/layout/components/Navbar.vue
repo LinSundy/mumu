@@ -38,7 +38,7 @@ export default {
     ])
   },
   mounted() {
-    // this.getUserInfo()
+    this.getUserInfo()
   },
   methods: {
     toggleSideBar() {
@@ -49,13 +49,9 @@ export default {
         location.reload() // 为了重新实例化vue-router对象 避免bug
       })
     },
-    // getUserInfo() {
-    //   this.$store.dispatch('GetInfo').then((res) => {
-    //     console.log('哈哈貌似没执行')
-    //   }).catch(() => {
-    //     this.$router.push('/login')
-    //   })
-    // }
+    getUserInfo() {
+      this.$store.dispatch('GetInfo')
+    }
   }
 }
 </script>

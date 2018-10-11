@@ -56,24 +56,17 @@ const user = {
     },
 
     // 获取用户信息
-    GetInfo({ commit}) {
-      return new Promise((resolve, reject) => {
-        if (getToken('username')) {
-          getInfo(getToken('username')).then(res => {
-            const data = res.data;
-            if (data.roles) {
-              commit('SET_ROLES', data.roles);
-            } else {
-              Message.error('无权限');
-            }
-            commit('SET_NAME', data.name);
-            commit('SET_AVATAR', data.avatar);
-            resolve(data)
-          });
+    GetInfo({commit}) {
+      getInfo().then(res => {
+        const data = res.data;
+        if (data.roles) {
+          commit('SET_ROLES', data.roles);
         } else {
-          reject('未登录，请重新登录');
+          Message.error('无权限');
         }
-      })
+        commit('SET_NAME', data.name);
+        commit('SET_AVATAR', data.avatar);
+      });
     },
 
     // 登出

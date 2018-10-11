@@ -19,10 +19,12 @@ import '@/permission' // permission control
 Vue.use(ElementUI, {locale})
 Vue.prototype.$message = Message
 Vue.config.productionTip = false
-new Vue({
+const app = new Vue({
   el: '#app',
   router,
   store,
   render: h => h(App)
 })
+
+export default app;
 

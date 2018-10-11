@@ -5,8 +5,8 @@ export function login(username, password) {
   return POST('/user/login', {username, password})
 }
 
-export function getInfo(username) {
-  return GET(`/user/info/${username}`)
+export function getInfo() {
+  return GET(`/user/info`)
 }
 
 export function logout() {
