@@ -25,6 +25,7 @@
 import {mapGetters} from 'vuex'
 import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
+import {getToken} from '../../../utils/auth'
 
 export default {
   components: {
@@ -46,11 +47,13 @@ export default {
     },
     logout() {
       this.$store.dispatch('LogOut').then(() => {
-        location.reload() // 为了重新实例化vue-router对象 避免bug
+        this.$router.push('/login') // 为了重新实例化vue-router对象 避免bug
       })
     },
     getUserInfo() {
-      this.$store.dispatch('GetInfo')
+      if (getToken()) {
+        this.$store.dispatch('GetInfo')
+      }
     }
   }
 }

@@ -6,6 +6,15 @@
       <navbar/>
       <app-main/>
     </div>
+    <el-dialog
+      :visible.sync="visible"
+      title="重新登录"
+      width="30%"
+      center
+    >
+      <span>未登录或登录已过期，请重新登录</span>
+      <el-button type="primary" @click="relogin">确 定</el-button>
+    </el-dialog>
   </div>
 </template>
 
@@ -22,6 +31,9 @@ export default {
   },
   mixins: [ResizeMixin],
   computed: {
+    visible() {
+      return this.$store.state.login.visible
+    },
     sidebar() {
       return this.$store.state.app.sidebar
     },
@@ -40,6 +52,11 @@ export default {
   methods: {
     handleClickOutside() {
       this.$store.dispatch('CloseSideBar', { withoutAnimation: false })
+    },
+    relogin() {
+      this.$store.dispatch('ReLogin').then(() => {
+        this.$router.push('/login')
+      })
     }
   }
 }

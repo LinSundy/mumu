@@ -58,7 +58,7 @@ const user = {
     // 获取用户信息
     GetInfo({commit}) {
       getInfo().then(res => {
-        const data = res.data;
+        const data = res && res.data;
         if (data.roles) {
           commit('SET_ROLES', data.roles);
         } else {
@@ -72,8 +72,11 @@ const user = {
     // 登出
     LogOut({ commit, state }) {
       return new Promise((resolve, reject) => {
-        logout(state.token)
+        console.log(logout(), 'logout返回')
+        logout()
           .then(() => {
+            commit('SET_NAME', '');
+            commit('SET_AVATAR', '');
             commit('SET_TOKEN', '');
             commit('SET_ROLES', '');
             removeToken();

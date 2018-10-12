@@ -1,4 +1,4 @@
-const whiteList = ['/user/login'];
+const whiteList = ['/user/login', '/user/logout'];
 
 export function login(req, res, next) {
     const sessionUsername = !!req.session.username;

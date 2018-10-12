@@ -1,4 +1,4 @@
-import request from '@/utils/request'
+// import request from '@/utils/request'
 import {GET, POST} from '@/utils/axios'
 
 export function login(username, password) {
@@ -10,8 +10,5 @@ export function getInfo() {
 }
 
 export function logout() {
-  return request({
-    url: '/user/logout',
-    method: 'post'
-  })
+  return GET(`/user/logout`)
 }

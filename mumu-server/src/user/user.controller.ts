@@ -23,4 +23,11 @@ export class UserController {
         let data = await this.userService.userinfo({username});
         return data[0]
     }
+
+    @Get('logout')
+    logout(@Req() req, @Res() res) {
+        delete req.session.username;
+        res.clearCookie('Admin-Token');
+        res.send({logout: true});
+    }
 }
