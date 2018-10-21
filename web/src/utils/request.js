@@ -42,7 +42,7 @@ export const GET = (url, data, config) => {
     method: 'get',
     params: data,
   }
-  return request({...CONF, ...config})
+  return request({ ...CONF, ...config })
 }
 
 export const POST = (url, data, config) => {
@@ -52,7 +52,7 @@ export const POST = (url, data, config) => {
     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
     data
   }
-  return request({...CONF, ...config})
+  return request({ ...CONF, ...config })
 }
 
 export const PUT = (url, data, config) => {
@@ -61,7 +61,7 @@ export const PUT = (url, data, config) => {
     method: 'put',
     data
   }
-  return request({...CONF, ...config})
+  return request({ ...CONF, ...config })
 }
 
 export const DELETE = (url, data, config) => {
@@ -70,5 +70,5 @@ export const DELETE = (url, data, config) => {
     method: 'delete',
     data
   }
-  return request({...CONF, ...config})
+  return request({ ...CONF, ...config })
 }

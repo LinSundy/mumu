@@ -15,9 +15,9 @@
 <script>
 export default {
   name: 'MuFooter'
-}
+};
 </script>
 
 <style lang="less" scoped>
-  @import "./index.less";
+@import './index.less';
 </style>
